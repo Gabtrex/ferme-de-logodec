@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ferme de Logodec – fromages fermiers bio à Pluvigner (Morbihan)</title>
+<meta name="description" content="Fromages et produits laitiers bio au lait de nos vaches bretonnes pie noir. Retrouvez-nous sur les marchés de Pluvigner, d'Auray et à l'AMAP de Lanester.">
+<meta name="robots" content="noindex, nofollow"><!-- maquette : ne pas indexer -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Alegreya+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+/* --- Couleurs et typo --- */
+:root {
+  --nuit: #1E3823;        /* vert très foncé : accueil, contact */
+  --haie: #2F5A33;        /* vert des haies */
+  --pre: #5F8F45;         /* vert prairie */
+  --herbe: #8DB65F;       /* vert clair */
+  --ciel: #D6E7C8;        /* ciel des illustrations */
+  --beurre: #F6C94A;      /* accent principal */
+  --lait: #FFFEF8;        /* fond */
+  --ardoise: #252C28;     /* ardoise du marché */
+  --craie: #F3F0E6;       /* texte sur ardoise */
+  --encre: #161A14;       /* texte */
+  --encre-douce: #4B5446; /* texte secondaire */
+  --pie: #141414;         /* noir des vaches */
+  --titre: "Young Serif", Georgia, "Times New Roman", serif;
+  --texte: "Alegreya Sans", "Segoe UI", system-ui, sans-serif;
+  --largeur: 1180px;      /* largeur max du contenu */
+}
+
+/* --- Base --- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--lait);
+  color: var(--encre);
+  font: 400 1.15rem/1.6 var(--texte);
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--beurre); outline-offset: 3px; }
+h1, h2, h3 { font-family: var(--titre); font-weight: 400; line-height: 1.08; margin: 0; letter-spacing: -.01em; }
+h2 { font-size: clamp(2.1rem, 4.4vw, 3.2rem); }
+p { margin: 0 0 1em; max-width: 60ch; }
+.conteneur { max-width: var(--largeur); margin: 0 auto; padding: 0 28px; }
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* --- Bandeau maquette --- */
+.maquette { background: var(--beurre); color: var(--encre); font-size: .95rem; text-align: center; padding: 7px 16px; }
+
+/* --- En-tête --- */
+.entete { background: var(--nuit); color: #fff; }
+.entete .conteneur { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 76px; }
+.marque { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.marque svg { width: 46px; height: 46px; flex: none; }
+.marque strong { display: block; font: 400 1.5rem/1 var(--titre); color: #fff; }
+.marque span span { font-size: .9rem; color: var(--herbe); } /* sous-titre uniquement */
+.nav { display: flex; gap: 26px; }
+.nav a { text-decoration: none; font-weight: 700; white-space: nowrap; }
+.nav a:hover { color: var(--beurre); }
+
+/* --- Accueil --- */
+.accueil { position: relative; background: var(--nuit); color: #fff; overflow: hidden; }
+.accueil .conteneur {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1.08fr 1fr; gap: 48px; align-items: center;
+  padding-top: 56px; padding-bottom: 250px; /* place pour la vache et les haies */
+}
+.accueil h1 { font-size: clamp(2.8rem, 6vw, 5.2rem); margin: 18px 0 22px; }
+.accueil p { font-size: 1.28rem; color: #E4ECDC; max-width: 44ch; }
+.pastille {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(141,182,95,.18); color: var(--herbe);
+  border: 1px solid rgba(141,182,95,.45);
+  padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: .98rem;
+}
+.pastille svg { width: 18px; height: 18px; }
+.boutons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.bouton {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 26px; border-radius: 999px;
+  font-weight: 800; font-size: 1.08rem; text-decoration: none;
+  background: var(--beurre); color: var(--encre);
+  box-shadow: 0 4px 0 #C99A1C; /* petit relief type étiquette */
+}
+.bouton:hover { transform: translateY(-1px); }
+.bouton.contour { background: transparent; color: #fff; box-shadow: inset 0 0 0 2px rgba(255,255,255,.75); }
+
+/* Cadre photo en arche, avec illustration derrière si la photo ne charge pas */
+.cadre {
+  position: relative;
+  aspect-ratio: 4/5;
+  border-radius: 999px 999px 28px 28px;
+  overflow: hidden;
+  border: 6px solid var(--beurre);
+  background: var(--ciel);
+}
+.cadre svg, .cadre img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.cadre img { object-position: 50% 40%; } /* garde la tête du veau au centre de l'arche */
+.cadre-zone { position: relative; max-width: 470px; justify-self: end; width: 100%; }
+.tampon {
+  position: absolute; left: -46px; top: 54px; z-index: 3;
+  width: 132px; height: 132px;
+  transform: rotate(-12deg);
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.25));
+}
+
+/* Paysage bas de l'accueil : haies + vache */
+.paysage { position: absolute; left: 0; right: 0; bottom: -1px; height: 150px; z-index: 1; }
+.paysage svg { width: 100%; height: 100%; display: block; }
+.vache-accueil { position: absolute; z-index: 3; left: max(3vw, calc(50% - 600px)); bottom: 26px; width: 250px; }
+
+/* --- Où nous trouver --- */
+.marches { padding: 84px 0 80px; }
+.tete-section { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 32px; margin-bottom: 34px; }
+.tete-section p { margin: 0; color: var(--encre-douce); font-size: 1.2rem; }
+.semaine {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px;
+}
+.jour {
+  position: relative;
+  min-height: 210px;
+  padding: 18px 16px;
+  border-radius: 18px;
+  background: #F1F3EA;
+  color: var(--encre-douce);
+}
+.jour .nom { display: block; font: 400 1.2rem var(--titre); color: var(--encre); }
+.jour.marche {
+  background: var(--beurre); color: var(--encre);
+  box-shadow: 0 6px 0 #C99A1C;
+}
+.jour.marche svg { width: 42px; height: 42px; margin-top: 16px; color: var(--nuit); }
+.jour .lieu { display: block; font: 400 1.45rem/1.12 var(--titre); margin-top: 10px; }
+.jour .heure { display: block; margin-top: 6px; font-weight: 700; }
+.jour.aujourdhui { outline: 4px solid var(--nuit); outline-offset: 3px; }
+.jour.aujourdhui::after {
+  content: "Aujourd'hui";
+  position: absolute; left: 16px; bottom: 16px;
+  font-size: .85rem; font-weight: 800;
+  color: #fff; background: var(--nuit);
+  padding: 3px 10px; border-radius: 999px;
+}
+/* Photo de l'étal, avec l'info "pas de vente à la ferme" posée dessus */
+.photo-marche { position: relative; margin: 34px 0 0; border-radius: 22px; overflow: hidden; aspect-ratio: 21/9; background: var(--ciel); }
+.photo-marche img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
+.note-ferme {
+  position: absolute; left: 20px; bottom: 20px; margin: 0;
+  display: flex; align-items: center; gap: 10px;
+  background: var(--beurre); color: var(--encre);
+  padding: 10px 18px; border-radius: 16px;
+  box-shadow: 0 4px 0 #C99A1C;
+  font-weight: 800; font-size: 1.1rem;
+}
+.note-ferme svg { width: 24px; height: 24px; color: var(--nuit); flex: none; }
+
+/* --- Produits : l'ardoise du marché --- */
+.produits { padding: 0 0 90px; }
+.ardoise {
+  position: relative;
+  background-color: var(--ardoise);
+  background-image: radial-gradient(rgba(255,255,255,.05) 1px, transparent 1.4px), radial-gradient(rgba(255,255,255,.035) 1px, transparent 1.4px);
+  background-size: 7px 7px, 11px 11px;
+  background-position: 0 0, 3px 5px;
+  color: var(--craie);
+  border-radius: 26px;
+  border: 14px solid #8A6A45;        /* cadre en bois */
+  box-shadow: inset 0 0 0 2px #6E5234, 0 14px 30px rgba(30,40,25,.18);
+  padding: 56px 56px 48px;
+}
+.ardoise .tete-section p { color: #C9CDBF; }
+.ardoise h2 { color: #fff; }
+.ardoise { display: grid; grid-template-columns: 290px 1fr; gap: 48px; align-items: center; }
+/* Photo punaisée sur l'ardoise, façon tirage papier */
+.photo-ardoise {
+  margin: 0; background: #FFFEF8; padding: 10px 10px 0;
+  border-radius: 6px; transform: rotate(-2.5deg);
+  box-shadow: 0 10px 24px rgba(0,0,0,.35);
+}
+.photo-ardoise img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 3px; }
+.photo-ardoise figcaption { font: 400 1.05rem/1.3 var(--titre); color: var(--encre); text-align: center; padding: 12px 6px 14px; }
+.grille-produits { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px 40px; }
+.grille-produits li { display: grid; grid-template-columns: 64px 1fr; gap: 16px; align-items: start; }
+.grille-produits svg { width: 64px; height: 64px; color: var(--craie); }
+.grille-produits h3 { font-size: 1.55rem; color: #fff; }
+.grille-produits h3 small { font: 500 1rem var(--texte); color: var(--beurre); margin-left: 4px; }
+.grille-produits p { margin: 6px 0 0; color: #D3D6CB; font-size: 1.05rem; }
+.grille-produits .saison { grid-template-columns: 1fr; border: 2px dashed rgba(243,240,230,.35); border-radius: 16px; padding: 16px 18px; }
+.grille-produits .saison p { margin: 0; color: var(--craie); }
+.grille-produits .saison strong { color: var(--beurre); }
+
+/* --- Bande photos --- */
+.bande { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 12px; padding: 0 12px; }
+.tuile {
+  position: relative; overflow: hidden; border-radius: 18px;
+  aspect-ratio: 4/3;
+  background: var(--ciel);
+}
+.tuile svg, .tuile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.bande .tuile:first-child { aspect-ratio: auto; }
+
+/* --- La ferme --- */
+.ferme { padding: 96px 0; }
+.ferme .conteneur { display: grid; grid-template-columns: .9fr 1.1fr; gap: 64px; align-items: center; }
+/* Portrait de Céline et Christophe, ombre jaune décalée */
+.photo-couple { position: relative; margin: 0; }
+.photo-couple img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 24px; box-shadow: 16px 16px 0 var(--beurre); }
+.photo-couple figcaption {
+  position: absolute; left: 18px; bottom: 18px;
+  background: var(--nuit); color: #fff;
+  font: 400 1.15rem var(--titre); padding: 8px 16px; border-radius: 999px;
+}
+.ferme h2 { margin-bottom: 24px; }
+.ferme .recit p { color: var(--encre-douce); }
+.frise { list-style: none; margin: 36px 0 0; padding: 0; position: relative; }
+.frise::before { content: ""; position: absolute; left: 47px; top: 10px; bottom: 10px; width: 3px; background: var(--herbe); border-radius: 3px; }
+.frise li { position: relative; display: grid; grid-template-columns: 96px 1fr; gap: 20px; padding: 0 0 26px; }
+.frise li:last-child { padding-bottom: 0; }
+.frise .annee {
+  position: relative; z-index: 1; justify-self: center; align-self: start; /* pastille à la taille du texte */
+  font: 400 1.15rem var(--titre);
+  background: var(--lait); color: var(--haie);
+  border: 3px solid var(--herbe); border-radius: 999px;
+  padding: 4px 12px; white-space: nowrap;
+}
+.frise li:last-child .annee { background: var(--beurre); border-color: var(--beurre); color: var(--encre); }
+.frise p { margin: 4px 0 0; }
+
+.race {
+  position: relative;
+  background: var(--ciel);
+  border-radius: 28px;
+  padding: 36px 36px 0;
+  overflow: hidden;
+}
+.race h3 { font-size: 2rem; color: var(--nuit); margin-bottom: 14px; }
+.race p { color: #2E3A2A; font-size: 1.1rem; }
+.race { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1.1fr; gap: 24px 40px; align-items: end; padding: 40px 0 0 44px; } /* bandeau pleine largeur sous l'histoire */
+.race > div { padding-bottom: 40px; }
+.race .scene { margin: 0; display: block; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 22%); mask-image: linear-gradient(to right, transparent 0, #000 22%); } /* fond du dessin fondu à gauche */
+.race .scene svg { width: 100%; height: auto; display: block; }
+
+/* --- Galerie --- */
+.galerie { padding: 0 0 96px; }
+.grille { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; } /* colonnes égales même avec du texte long */
+.grille button {
+  position: relative; padding: 0; border: 0; cursor: zoom-in;
+  border-radius: 14px; overflow: hidden; aspect-ratio: 4/3;
+  background: var(--ciel);
+}
+.grille button { aspect-ratio: 3/4; } /* photos en portrait */
+/* Dernière case : lien Instagram */
+.tuile-insta {
+  aspect-ratio: 3/4; border-radius: 14px;
+  background: var(--beurre); color: var(--encre); text-decoration: none;
+  display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px;
+  text-align: center; padding: 16px;
+}
+.tuile-insta svg { width: 52px; height: 52px; color: var(--nuit); }
+.tuile-insta strong { font: 400 1.5rem/1.15 var(--titre); }
+.tuile-insta span { font-weight: 700; overflow-wrap: anywhere; }
+.tuile-insta:hover { filter: brightness(1.04); }
+.grille button img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; } /* photos seulement, pas l'icône Instagram */
+.grille button:hover img { transform: scale(1.03); }
+.grille img { transition: transform .4s ease; }
+@media (prefers-reduced-motion: reduce) { .grille img { transition: none; } }
+.credit { margin-top: 14px; color: var(--encre-douce); font-size: 1rem; }
+dialog.visionneuse { border: 0; padding: 0; background: transparent; max-width: min(92vw, 1400px); max-height: 90vh; }
+dialog.visionneuse::backdrop { background: rgba(10,14,9,.9); }
+dialog.visionneuse img { max-height: 86vh; width: auto; border-radius: 10px; }
+dialog.visionneuse .fermer {
+  position: fixed; top: 16px; right: 16px;
+  font: 800 1rem var(--texte); background: var(--beurre); color: var(--encre);
+  border: 0; border-radius: 999px; padding: 10px 18px; cursor: pointer;
+}
+
+/* --- Contact --- */
+.contact { position: relative; background: var(--nuit); color: #E4ECDC; padding: 150px 0 80px; }
+.contact .haut { position: absolute; top: -1px; left: 0; right: 0; height: 110px; }
+.contact .haut svg { width: 100%; height: 100%; display: block; }
+.contact .conteneur { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: center; }
+.contact h2 { color: #fff; margin-bottom: 18px; }
+.carte-contact {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 22px; padding: 28px;
+  display: grid; gap: 20px;
+}
+.carte-contact div { display: grid; grid-template-columns: 34px 1fr; gap: 14px; align-items: start; }
+.carte-contact svg { width: 30px; height: 30px; color: var(--beurre); }
+.carte-contact strong { display: block; font: 400 1.15rem var(--titre); color: #fff; }
+.carte-contact a { color: #fff; }
+
+/* --- Pied de page --- */
+.pied { background: #15281A; color: #A9B8A0; padding: 22px 0; font-size: .95rem; }
+.pied .conteneur { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+
+/* --- Tablette --- */
+@media (max-width: 980px) {
+  .accueil .conteneur { grid-template-columns: 1fr; padding-bottom: 170px; }
+  .cadre-zone { justify-self: start; max-width: 520px; }
+  .cadre { aspect-ratio: 5/4; border-radius: 260px 260px 24px 24px; }
+  .tampon { left: auto; right: -14px; top: -30px; }
+  .vache-accueil { left: auto; right: 4vw; width: 200px; }
+  .semaine { grid-template-columns: repeat(4, 1fr); }
+  .jour:not(.marche) { display: none; }   /* on ne garde que les jours de marché */
+  .semaine { grid-template-columns: repeat(3, 1fr); }
+  .ardoise { grid-template-columns: 1fr; gap: 36px; }
+  .photo-ardoise { max-width: 300px; justify-self: center; }
+  .grille-produits { grid-template-columns: repeat(2, 1fr); }
+  .ferme .conteneur, .contact .conteneur { grid-template-columns: 1fr; gap: 40px; }
+  .photo-couple { max-width: 520px; }
+  .race { grid-template-columns: 1fr; padding: 36px 36px 0; }
+  .race > div { padding-bottom: 0; }
+  .race .scene { margin: 0 -36px; -webkit-mask-image: none; mask-image: none; }
+  .grille { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .photo-marche { aspect-ratio: 16/9; }
+  .bande { grid-template-columns: 1fr 1fr; }
+  .bande .tuile:first-child { grid-column: span 2; aspect-ratio: 16/9; }
+}
+/* --- Téléphone --- */
+@media (max-width: 640px) {
+  body { font-size: 1.08rem; }
+  .conteneur { padding: 0 16px; }
+  .entete .conteneur { flex-direction: column; align-items: flex-start; gap: 8px; padding-top: 12px; padding-bottom: 12px; }
+  .nav { flex-wrap: wrap; gap: 4px 18px; font-size: 1rem; }
+  .accueil .conteneur { padding-top: 36px; padding-bottom: 130px; gap: 36px; }
+  .accueil p { font-size: 1.12rem; }
+  .tampon { width: 100px; height: 100px; right: -6px; top: -26px; }
+  .paysage { height: 110px; }
+  .vache-accueil { width: 150px; bottom: 18px; right: 16px; }
+  .marches { padding: 60px 0; }
+  .semaine { grid-template-columns: 1fr; }
+  .jour { min-height: 0; display: grid; grid-template-columns: 52px 1fr; column-gap: 14px; align-items: center; padding: 16px; }
+  .jour.marche svg { grid-row: span 3; margin: 0; }
+  .jour .lieu { margin-top: 2px; font-size: 1.3rem; }
+  .jour .heure { margin-top: 2px; }
+  .jour.aujourdhui::after { position: static; grid-column: 2; justify-self: start; margin-top: 8px; }
+  .ardoise { padding: 32px 22px; border-width: 10px; border-radius: 20px; }
+  .produits { padding-bottom: 60px; }
+  .grille-produits { grid-template-columns: 1fr; gap: 26px; }
+  .grille-produits li { grid-template-columns: 52px 1fr; }
+  .grille-produits svg { width: 52px; height: 52px; }
+  .bande { padding: 0 8px; gap: 8px; }
+  .ferme { padding: 64px 0; }
+  .frise::before { left: 45px; }
+  .frise li { grid-template-columns: 92px 1fr; gap: 12px; }
+  .frise .annee { font-size: 1rem; padding: 4px 10px; }
+  .race { padding: 28px 24px 0; }
+  .race .scene { margin: 0 -24px; }
+  .photo-marche { aspect-ratio: 4/3; }
+  .note-ferme { left: 12px; right: 12px; bottom: 12px; font-size: 1rem; padding: 10px 14px; }
+  .photo-couple img { box-shadow: 10px 10px 0 var(--beurre); }
+  .galerie { padding-bottom: 64px; }
+  .grille { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .contact { padding: 120px 0 60px; }
+}
+</style>
+</head>
+<body>
+
+<!-- --- Dessins réutilisables (vache, haies, icônes) --- -->
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- Haie de bocage, motif qui se répète -->
+    <pattern id="haie" width="220" height="110" patternUnits="userSpaceOnUse">
+      <g fill="#24472A">
+        <circle cx="0" cy="62" r="30"/><circle cx="44" cy="50" r="34"/><circle cx="92" cy="60" r="30"/>
+        <circle cx="134" cy="46" r="36"/><circle cx="180" cy="58" r="32"/><circle cx="220" cy="62" r="30"/>
+      </g>
+      <g fill="#3B6B3C">
+        <circle cx="-18" cy="80" r="26"/><circle cx="22" cy="80" r="26"/><circle cx="68" cy="76" r="30"/>
+        <circle cx="114" cy="82" r="26"/><circle cx="158" cy="74" r="30"/><circle cx="202" cy="80" r="26"/>
+      </g>
+      <rect y="86" width="220" height="24" fill="#3B6B3C"/>
+    </pattern>
+    <clipPath id="corps-vache"><path d="M96 74 Q92 54 118 52 L236 52 Q270 52 270 88 L270 118 Q270 144 244 144 L122 144 Q96 144 96 120 Z"/></clipPath>
+  </defs>
+
+  <!-- Vache bretonne pie noir, vue de côté -->
+  <symbol id="vache" viewBox="0 0 320 222">
+    <ellipse cx="180" cy="212" rx="120" ry="8" fill="#000" opacity=".18"/>
+    <path d="M266 84 Q290 104 284 168" fill="none" stroke="#141414" stroke-width="5" stroke-linecap="round"/>
+    <path d="M276 160 q8 6 8 20 q-10 -4 -14 -16 z" fill="#141414"/>
+    <rect x="222" y="128" width="18" height="70" rx="6" fill="#E9E4D6" stroke="#141414" stroke-width="3"/>
+    <rect x="128" y="128" width="18" height="70" rx="6" fill="#E9E4D6" stroke="#141414" stroke-width="3"/>
+    <rect x="222" y="190" width="18" height="12" rx="3" fill="#141414"/>
+    <rect x="128" y="190" width="18" height="12" rx="3" fill="#141414"/>
+    <path d="M96 74 Q92 54 118 52 L236 52 Q270 52 270 88 L270 118 Q270 144 244 144 L122 144 Q96 144 96 120 Z" fill="#FFFEF8"/>
+    <g clip-path="url(#corps-vache)" fill="#141414">
+      <path d="M170 40 Q200 36 236 46 Q284 56 276 100 Q268 120 236 112 Q212 104 196 88 Q172 70 170 40 Z"/>
+      <path d="M118 112 Q136 98 158 108 Q170 122 156 140 Q130 152 112 140 Z"/>
+      <ellipse cx="214" cy="136" rx="14" ry="9"/>
+    </g>
+    <path d="M96 74 Q92 54 118 52 L236 52 Q270 52 270 88 L270 118 Q270 144 244 144 L122 144 Q96 144 96 120 Z" fill="none" stroke="#141414" stroke-width="3.5"/>
+    <ellipse cx="226" cy="148" rx="17" ry="9" fill="#F0B4AA" stroke="#141414" stroke-width="3"/>
+    <rect x="236" y="130" width="18" height="72" rx="6" fill="#FFFEF8" stroke="#141414" stroke-width="3"/>
+    <rect x="112" y="130" width="18" height="72" rx="6" fill="#FFFEF8" stroke="#141414" stroke-width="3"/>
+    <rect x="236" y="192" width="18" height="12" rx="3" fill="#141414"/>
+    <rect x="112" y="192" width="18" height="12" rx="3" fill="#141414"/>
+    <path d="M118 60 Q96 62 82 76 L96 100 Q112 88 122 84 Z" fill="#141414"/>
+    <path d="M52 36 Q44 22 54 14 Q52 26 62 34 Z" fill="#E8DDBF" stroke="#141414" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M90 34 Q100 22 94 12 Q90 24 80 32 Z" fill="#E8DDBF" stroke="#141414" stroke-width="2.5" stroke-linejoin="round"/>
+    <ellipse cx="38" cy="46" rx="16" ry="8" transform="rotate(-20 38 46)" fill="#141414"/>
+    <ellipse cx="106" cy="46" rx="16" ry="8" transform="rotate(20 106 46)" fill="#141414"/>
+    <path d="M50 34 Q72 26 94 34 Q102 60 96 90 Q90 112 72 114 Q54 112 48 90 Q42 60 50 34 Z" fill="#141414"/>
+    <path d="M66 36 Q72 32 78 36 L76 62 Q72 66 68 62 Z" fill="#FFFEF8"/>
+    <ellipse cx="72" cy="104" rx="22" ry="14" fill="#E9C3B8" stroke="#141414" stroke-width="3"/>
+    <ellipse cx="64" cy="104" rx="3" ry="4" fill="#141414"/><ellipse cx="80" cy="104" rx="3" ry="4" fill="#141414"/>
+    <circle cx="58" cy="66" r="5" fill="#FFFEF8"/><circle cx="86" cy="66" r="5" fill="#FFFEF8"/>
+    <circle cx="59" cy="67" r="2.6" fill="#141414"/><circle cx="85" cy="67" r="2.6" fill="#141414"/>
+  </symbol>
+
+  <!-- Tête de vache pour le logo -->
+  <symbol id="logo" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="31" fill="#F6C94A"/>
+    <ellipse cx="14" cy="26" rx="9" ry="4.5" transform="rotate(-18 14 26)" fill="#141414"/>
+    <ellipse cx="50" cy="26" rx="9" ry="4.5" transform="rotate(18 50 26)" fill="#141414"/>
+    <path d="M22 18 Q18 10 22 6 Q22 13 27 17 Z" fill="#FFFEF8" stroke="#141414" stroke-width="1.5"/>
+    <path d="M42 18 Q46 10 42 6 Q42 13 37 17 Z" fill="#FFFEF8" stroke="#141414" stroke-width="1.5"/>
+    <path d="M21 17 Q32 12 43 17 Q47 32 43 44 Q39 54 32 54 Q25 54 21 44 Q17 32 21 17 Z" fill="#141414"/>
+    <path d="M29 18 Q32 16 35 18 L34 32 Q32 34 30 32 Z" fill="#FFFEF8"/>
+    <ellipse cx="32" cy="49" rx="10" ry="7" fill="#E9C3B8" stroke="#141414" stroke-width="1.5"/>
+    <circle cx="25.5" cy="33" r="2.4" fill="#FFFEF8"/><circle cx="38.5" cy="33" r="2.4" fill="#FFFEF8"/>
+  </symbol>
+
+  <!-- Paysage de bocage (fond des cadres photo) -->
+  <symbol id="paysage" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+    <rect width="400" height="300" fill="#D6E7C8"/>
+    <circle cx="312" cy="78" r="34" fill="#F6C94A"/>
+    <path d="M0 170 Q100 120 210 150 T400 140 V300 H0 Z" fill="#8DB65F"/>
+    <g fill="#2F5A33">
+      <circle cx="20" cy="160" r="18"/><circle cx="48" cy="152" r="22"/><circle cx="78" cy="156" r="18"/>
+      <circle cx="250" cy="150" r="20"/><circle cx="280" cy="142" r="24"/><circle cx="312" cy="148" r="19"/><circle cx="340" cy="144" r="21"/>
+    </g>
+    <path d="M0 220 Q120 180 240 210 T400 200 V300 H0 Z" fill="#5F8F45"/>
+    <use href="#vache" x="150" y="168" width="130" height="90"/>
+  </symbol>
+
+  <!-- Icônes (trait, couleur héritée) -->
+  <symbol id="i-panier" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20h36l-4 20H10z"/><path d="M15 20l6-12M33 20l-6-12"/><path d="M18 27v7M24 27v7M30 27v7"/></g></symbol>
+  <symbol id="i-feuille" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 26C6 12 14 6 27 5c0 13-6 21-19 21z"/><path d="M6 26l11-11"/></g></symbol>
+  <symbol id="i-maison" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15L16 6l11 9"/><path d="M8 13v13h16V13"/><path d="M5 27L27 5"/></g></symbol>
+  <symbol id="i-pave" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 26l20-10 28 10-20 11z"/><path d="M8 26v16l28 11V37"/><path d="M36 53l20-11V26"/><path d="M16 34l4 1.5M24 41l3 1M44 40l3-2"/></g></symbol>
+  <symbol id="i-tomette" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="22" cy="40" rx="13" ry="5"/><path d="M9 40v8c0 3 6 5 13 5s13-2 13-5v-8"/><ellipse cx="42" cy="26" rx="13" ry="5"/><path d="M29 26v8c0 3 6 5 13 5s13-2 13-5v-8"/><path d="M38 47h18"/></g></symbol>
+  <symbol id="i-pot" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 18h28l-3 36H21z"/><path d="M15 12h34v6H15z"/><path d="M24 30c4 3 12 3 16 0"/><path d="M27 40h10"/></g></symbol>
+  <symbol id="i-bol" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 30h48c0 13-10 22-24 22S8 43 8 30z"/><path d="M14 30c3-4 8-5 12-3s9 1 12-2 9-2 12 2"/><path d="M38 24l14-14"/><path d="M26 58h12"/></g></symbol>
+  <symbol id="i-beurre" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 34l16-10h32L40 34z"/><path d="M8 34v12h32V34"/><path d="M40 46l16-10V24"/><path d="M14 40h20"/><path d="M50 14c-2 2-2 5 0 7M44 12c-2 3-2 6 0 9"/></g></symbol>
+  <symbol id="i-mail" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="24" height="18" rx="3"/><path d="M5 9l11 9 11-9"/></g></symbol>
+  <symbol id="i-lieu" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 29s9-8.5 9-15a9 9 0 0 0-18 0c0 6.5 9 15 9 15z"/><circle cx="16" cy="14" r="3.5"/></g></symbol>
+  <symbol id="i-insta" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="22" height="22" rx="6"/><circle cx="16" cy="16" r="5"/><circle cx="22.5" cy="9.5" r=".8" fill="currentColor"/></g></symbol>
+</svg>
+
+<div class="maquette" role="note">Maquette proposée par Gabriel Fernandes Neves. Textes et photos repris de fermedelogodec.bzh, tout reste modifiable.</div>
+
+<header class="entete">
+  <div class="conteneur">
+    <a class="marque" href="#">
+      <svg aria-hidden="true"><use href="#logo"/></svg>
+      <span><strong>Ferme de Logodec</strong><span>Pluvigner, Morbihan</span></span>
+    </a>
+    <nav class="nav" aria-label="Menu principal">
+      <a href="#marches">Où nous trouver</a>
+      <a href="#produits">Nos produits</a>
+      <a href="#ferme">La ferme</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- --- Accueil --- -->
+  <section class="accueil">
+    <div class="conteneur">
+      <div>
+        <span class="pastille"><svg aria-hidden="true"><use href="#i-feuille"/></svg>Agriculture biologique, depuis 1997</span>
+        <h1>Les fromages de nos vaches bretonnes pie noir</h1>
+        <p>Une petite ferme à Pluvigner. Chaque jour, nous transformons le lait de notre troupeau, et nous vendons tout nous-mêmes sur les marchés.</p>
+        <div class="boutons">
+          <a class="bouton" href="#marches">Où nous trouver</a>
+          <a class="bouton contour" href="#produits">Nos produits</a>
+        </div>
+      </div>
+      <div class="cadre-zone">
+        <svg class="tampon" viewBox="0 0 140 140" aria-hidden="true">
+          <defs><path id="cercle-tampon" d="M70 70 m-50 0 a50 50 0 1 1 100 0 a50 50 0 1 1 -100 0"/></defs>
+          <circle cx="70" cy="70" r="68" fill="#FFFEF8"/>
+          <circle cx="70" cy="70" r="62" fill="none" stroke="#1E3823" stroke-width="2" stroke-dasharray="3 4"/>
+          <text font-family="Alegreya Sans, Segoe UI, sans-serif" font-weight="800" font-size="13.5" letter-spacing="2.4" fill="#1E3823"><textPath href="#cercle-tampon" textLength="310" lengthAdjust="spacing">FAIT À LA FERME • DEPUIS 2004 •</textPath></text>
+          <use href="#logo" x="44" y="44" width="52" height="52"/>
+        </svg>
+        <div class="cadre">
+          <svg aria-hidden="true"><use href="#paysage"/></svg>
+          <img src="images/accueil.jpg" alt="Un veau de la ferme de Logodec, dans la brume" onerror="this.remove()">
+        </div>
+      </div>
+    </div>
+    <div class="paysage" aria-hidden="true">
+      <svg preserveAspectRatio="none" viewBox="0 0 1440 150">
+        <rect y="20" width="1440" height="110" fill="url(#haie)"/>
+        <path d="M0 118 Q360 96 720 112 T1440 108 V150 H0 Z" fill="#FFFEF8"/>
+      </svg>
+    </div>
+    <svg class="vache-accueil" viewBox="0 0 320 222" aria-hidden="true"><use href="#vache"/></svg>
+  </section>
+
+  <!-- --- Où nous trouver --- -->
+  <section class="marches" id="marches">
+    <div class="conteneur">
+      <div class="tete-section">
+        <h2>Où nous trouver cette semaine</h2>
+        <p>Trois rendez-vous, toute l'année.</p>
+      </div>
+      <ol class="semaine">
+        <li class="jour" data-day="1"><span class="nom">Lundi</span></li>
+        <li class="jour marche" data-day="2"><svg aria-hidden="true"><use href="#i-panier"/></svg><span class="nom">Mardi</span><span class="lieu">AMAP de Lanester</span><span class="heure">Le soir</span></li>
+        <li class="jour" data-day="3"><span class="nom">Mercredi</span></li>
+        <li class="jour marche" data-day="4"><svg aria-hidden="true"><use href="#i-panier"/></svg><span class="nom">Jeudi</span><span class="lieu">Marché d'Auray</span><span class="heure">L'après-midi</span></li>
+        <li class="jour" data-day="5"><span class="nom">Vendredi</span></li>
+        <li class="jour marche" data-day="6"><svg aria-hidden="true"><use href="#i-panier"/></svg><span class="nom">Samedi</span><span class="lieu">Marché de Pluvigner</span><span class="heure">Le matin</span></li>
+        <li class="jour" data-day="0"><span class="nom">Dimanche</span></li>
+      </ol>
+      <figure class="photo-marche">
+        <img src="images/marche.jpg" alt="Christophe servant un client sur l'étal de la ferme au marché" loading="lazy">
+        <figcaption class="note-ferme"><svg aria-hidden="true"><use href="#i-maison"/></svg>Pas de vente à la ferme : venez nous voir sur les marchés.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- --- Produits --- -->
+  <section class="produits" id="produits">
+    <div class="conteneur">
+      <div class="ardoise">
+        <figure class="photo-ardoise">
+          <img src="images/fromagerie.jpg" alt="Le caillé versé à la louche dans les moules, à la fromagerie" loading="lazy">
+          <figcaption>Moulé à la louche, dans notre fromagerie</figcaption>
+        </figure>
+        <div class="contenu-ardoise">
+        <div class="tete-section">
+          <h2>Sur notre étal</h2>
+          <p>Tout est fait à la ferme, avec le lait de nos vaches nourries à l'herbe.</p>
+        </div>
+        <ul class="grille-produits">
+          <li><svg aria-hidden="true"><use href="#i-pave"/></svg><div><h3>Le pavé de Logodec</h3><p>Notre fromage à pâte molle, dans l'esprit du pont-l'évêque.</p></div></li>
+          <li><svg aria-hidden="true"><use href="#i-tomette"/></svg><div><h3>La tomette</h3><p>Petit fromage fermier, frais ou affiné selon la saison.</p></div></li>
+          <li><svg aria-hidden="true"><use href="#i-pot"/></svg><div><h3>Le laezh goell <small>gwell</small></h3><p>Lait fermenté traditionnel breton, ensemencé avec le gwell de la fabrication précédente.</p></div></li>
+          <li><svg aria-hidden="true"><use href="#i-bol"/></svg><div><h3>Le riz au lait</h3><p>Préparé avec le lait entier de la ferme.</p></div></li>
+          <li><svg aria-hidden="true"><use href="#i-beurre"/></svg><div><h3>Fromage blanc, crème et beurre</h3><p>Les classiques de la crèmerie, faits ici.</p></div></li>
+          <li class="saison"><p><strong>Selon la saison.</strong> La gamme suit la traite et l'herbe des prairies. Demandez-nous au marché ce qu'il y a cette semaine.</p></li>
+        </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- --- Bande photos --- -->
+  <div class="bande" aria-label="Photos de la ferme">
+    <div class="tuile"><img src="images/troupeau.jpg" alt="Le troupeau de bretonnes pie noir dans une prairie bordée de haies" loading="lazy"></div>
+    <div class="tuile"><img src="images/vaches-arbres.jpg" alt="Les vaches sous les arbres plantés autour des prairies" loading="lazy"></div>
+    <div class="tuile"><img src="images/balade.jpg" alt="Céline et Christophe marchent dans une prairie de la ferme" loading="lazy"></div>
+  </div>
+
+  <!-- --- La ferme --- -->
+  <section class="ferme" id="ferme">
+    <div class="conteneur">
+      <figure class="photo-couple">
+        <img src="images/celine-christophe.jpg" alt="Céline et Christophe avec une de leurs vaches" loading="lazy">
+        <figcaption>Céline et Christophe</figcaption>
+      </figure>
+      <div class="recit">
+        <h2>Notre histoire</h2>
+        <p>Nous, Céline et Christophe, avons toujours été passionnés par les animaux et la nature. Nous voulions une petite production qui nous fasse vivre tout en respectant l'environnement, et nous faisons tout nous-mêmes, de l'élevage à la vente.</p>
+        <ol class="frise">
+          <li><span class="annee">1997</span><p>Installation à Séné, en agriculture biologique dès le premier jour.</p></li>
+          <li><span class="annee">2004</span><p>Nous déménageons le troupeau à Logodec, à Pluvigner. Sur nos 18 hectares, il n'y a presque aucun arbre.</p></li>
+          <li><span class="annee">Depuis</span><p>Plusieurs centaines d'arbres plantés chaque année : nos prairies sont maintenant entourées de haies.</p></li>
+          <li><span class="annee">Aujourd'hui</span><p>Une dizaine de bretonnes pie noir, et tout leur lait transformé dans notre fromagerie.</p></li>
+        </ol>
+      </div>
+      <aside class="race">
+        <div>
+          <h3>La bretonne pie noir</h3>
+          <p>L'une des plus petites races de vaches de France, originaire de chez nous. Rustique, elle vit dehors et se nourrit de l'herbe des prairies. Elle a bien failli disparaître au siècle dernier : des éleveurs comme nous la font vivre aujourd'hui.</p>
+        </div>
+        <span class="scene" aria-hidden="true">
+          <svg viewBox="0 0 520 250">
+            <circle cx="430" cy="60" r="30" fill="#F6C94A"/>
+            <path d="M0 150 Q140 110 280 140 T520 128 V250 H0 Z" fill="#8DB65F"/>
+            <g fill="#2F5A33"><circle cx="30" cy="140" r="20"/><circle cx="62" cy="130" r="25"/><circle cx="96" cy="136" r="20"/><circle cx="400" cy="126" r="22"/><circle cx="434" cy="118" r="26"/><circle cx="470" cy="124" r="21"/><circle cx="500" cy="120" r="22"/></g>
+            <path d="M0 196 Q160 168 300 190 T520 184 V250 H0 Z" fill="#5F8F45"/>
+            <use href="#vache" x="60" y="98" width="230" height="160"/>
+            <use href="#vache" x="300" y="138" width="150" height="104"/>
+          </svg>
+        </span>
+      </aside>
+    </div>
+  </section>
+
+  <!-- --- Galerie --- -->
+  <section class="galerie" aria-labelledby="titre-galerie">
+    <div class="conteneur">
+      <div class="tete-section">
+        <h2 id="titre-galerie">La ferme en images</h2>
+        <p>Touchez une photo pour l'agrandir.</p>
+      </div>
+      <div class="grille">
+        <button type="button"><img src="images/g-prairie.jpg" alt="Une bretonne pie noir dans les herbes hautes" loading="lazy"></button>
+        <button type="button"><img src="images/g-traite.jpg" alt="La traite à la main dans le seau" loading="lazy"></button>
+        <button type="button"><img src="images/g-veaux.jpg" alt="Deux veaux qui boivent au seau" loading="lazy"></button>
+        <button type="button"><img src="images/g-cornes.jpg" alt="Portrait d'une vache aux cornes en lyre" loading="lazy"></button>
+        <button type="button"><img src="images/g-etable.jpg" alt="Céline trait une vache dans l'étable" loading="lazy"></button>
+        <button type="button"><img src="images/g-feuilles.jpg" alt="Une vache broute les feuilles d'un arbre" loading="lazy"></button>
+        <button type="button"><img src="images/g-robe.jpg" alt="La robe pie noir de près" loading="lazy"></button>
+        <a class="tuile-insta" href="https://www.instagram.com/ferme.de.logodec/" target="_blank" rel="noopener">
+          <svg aria-hidden="true"><use href="#i-insta"/></svg>
+          <strong>La suite sur Instagram</strong>
+          <span>@ferme.de.logodec</span>
+        </a>
+      </div>
+      <p class="credit">Photos : Evaine Merle</p>
+    </div>
+    <dialog class="visionneuse" id="visionneuse" aria-label="Photo agrandie">
+      <button type="button" class="fermer">Fermer</button>
+      <img alt="Photo agrandie de la ferme de Logodec">
+    </dialog>
+  </section>
+
+  <!-- --- Contact --- -->
+  <section class="contact" id="contact">
+    <div class="haut" aria-hidden="true">
+      <svg preserveAspectRatio="none" viewBox="0 0 1440 110">
+        <rect width="1440" height="110" fill="#FFFEF8"/>
+        <rect y="4" width="1440" height="110" fill="url(#haie)"/>
+        <path d="M0 96 Q360 84 720 92 T1440 90 V110 H0 Z" fill="#1E3823"/>
+      </svg>
+    </div>
+    <div class="conteneur">
+      <div>
+        <h2>Une question ?</h2>
+        <p>Écrivez-nous, ou passez nous voir au marché. Nous répondons dès que la traite et la fromagerie nous en laissent le temps.</p>
+        <div class="boutons"><a class="bouton" href="mailto:fermedelogodec@yahoo.fr">Nous écrire</a></div>
+      </div>
+      <div class="carte-contact">
+        <div><svg aria-hidden="true"><use href="#i-lieu"/></svg><p><strong>Adresse</strong>Logodec, 56330 Pluvigner</p></div>
+        <div><svg aria-hidden="true"><use href="#i-mail"/></svg><p><strong>E-mail</strong><a href="mailto:fermedelogodec@yahoo.fr">fermedelogodec@yahoo.fr</a></p></div>
+        <div><svg aria-hidden="true"><use href="#i-insta"/></svg><p><strong>Instagram</strong><a href="https://www.instagram.com/ferme.de.logodec/" target="_blank" rel="noopener">@ferme.de.logodec</a></p></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pied">
+  <div class="conteneur">
+    <span>Ferme de Logodec, 56330 Pluvigner. Photos : Evaine Merle.</span>
+    <span>Maquette réalisée par Gabriel Fernandes Neves</span>
+  </div>
+</footer>
+
+<script>
+// --- Jour courant dans la semaine des marchés --- \\
+const aujourdhui = new Date().getDay(); // 0 = dimanche, 6 = samedi
+document.querySelectorAll('.jour').forEach(function (jour) {
+  if (Number(jour.dataset.day) === aujourdhui) jour.classList.add('aujourdhui'); // badge "Aujourd'hui"
+});
+
+// --- Galerie --- \\
+const visionneuse = document.getElementById('visionneuse'); // fenêtre photo agrandie
+const grandeImage = visionneuse.querySelector('img');      // image affichée en grand
+
+document.querySelectorAll('.grille button').forEach(function (bouton) {
+  bouton.addEventListener('click', function () {
+    const img = bouton.querySelector('img'); // photo de la case
+    grandeImage.src = img.src;               // même fichier, affiché en grand
+    visionneuse.showModal();
+  });
+});
+
+visionneuse.querySelector('.fermer').addEventListener('click', function () { visionneuse.close(); });
+visionneuse.addEventListener('click', function (e) { if (e.target === visionneuse) visionneuse.close(); }); // clic hors de la photo
+</script>
+</body>
+</html>
